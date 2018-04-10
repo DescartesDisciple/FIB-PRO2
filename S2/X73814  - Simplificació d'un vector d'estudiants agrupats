@@ -1,0 +1,45 @@
+#include "Estudiant.hh"
+#include <vector>
+
+int main(){
+    
+    int n;
+    cin >> n;
+    vector<Estudiant> v(n);
+    vector<Estudiant> u(n);
+    for (int i = 0; i < n; ++i){
+        v[i].llegir();
+    }
+    //bool first = true;
+    int iu = 0;
+    u[iu] = v[0];
+    for (int i = 1; i < n; ++i){
+
+        if (u[iu].consultar_DNI() != v[i].consultar_DNI()){
+
+            ++iu;
+            u[iu] = v[i];
+        }
+        else{
+
+            if (v[i].te_nota()){
+                if (not u[iu].te_nota()){
+                    u[iu].afegir_nota(v[i].consultar_nota());
+                }
+                else if (v[i].consultar_nota() > u[iu].consultar_nota()){
+
+                    u[iu].modificar_nota(v[i].consultar_nota());
+                }
+            }
+        }
+
+    }
+    for (int i = 0; i < n;++i){
+        
+        if (u[i].consultar_DNI() != 0){
+            u[i].escriure();
+        }
+    }
+}
+                
+                
