@@ -1,0 +1,43 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+void maxmin (queue<int> q, int max, int min, double count)
+{
+    double media = count/q.size();
+    while (not q.empty()){
+        
+        if(q.front() > max) max = q.front();
+        if(q.front() < min) min = q.front();
+        q.pop();
+    }
+        cout << "min " << min << "; max " << max << "; media " << media << endl;
+}
+
+int main(){
+    
+    int n, max = -1002, min = 1001;
+    double  count = 0;
+    queue<int> q;
+    
+    while (cin >> n and (n >= -1001 and n <= 1000))
+    {
+        if (n != -1001)
+        {
+            count += n;
+            q.push(n);
+        }
+        else if (n == -1001 and not q.empty())
+        {
+            count -= q.front();
+            q.pop();
+        }
+        
+        if (q.empty()) cout << '0' << endl;
+        else
+        {
+            maxmin(q, max, min, count);
+        }
+            
+    }
+}
