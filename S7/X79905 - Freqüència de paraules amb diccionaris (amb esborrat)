@@ -1,0 +1,21 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main(){
+    
+    char c;
+    string s;
+    map<string, int> m;
+    while (cin >> c){
+        
+        cin >> s;
+        if (c == 'a') ++ m[s];
+        else if (c == 'e'){
+            
+            if (m[s] != 0) --m[s];
+            else m.erase(s);
+        }
+        else cout << m[s] << endl;
+    }
+}
