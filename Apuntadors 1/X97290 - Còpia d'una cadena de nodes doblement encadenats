@@ -1,0 +1,79 @@
+node_llista* copia_node_llista_it (node_llista* m, node_llista* oact,
+         node_llista* &u, node_llista* &a){
+/* Pre: cert */
+/* Post: si m és NULL, el resultat, u i a són NULL; en cas
+       contrari, el resultat apunta al primer node d'una cadena de
+       nodes que són còpia de la cadena que té el node apuntat per m
+       com a primer, u apunta a l'últim node, a és o bé NULL si oact
+       no apunta a cap node de la cadena que comença amb m o bé apunta
+       al node còpia del node apuntat per oact */
+
+    if (m == NULL){
+        
+        u = NULL;
+        a = NULL;
+        return NULL;
+    }
+    else{
+        
+        a = NULL;
+        node_llista* cp = NULL;
+        
+        bool first = true;
+        node_llista* aux = NULL;
+        
+        while (m != NULL){
+            
+            node_llista* nwn;
+            nwn = new node_llista;
+            nwn->info = m->info;
+            if (aux != NULL) aux->seg = nwn;
+            
+            nwn->ant = aux;
+            if (first){
+                
+                first = false;
+                cp = nwn;
+            }
+        
+            if (oact == m) a = nwn;
+            
+            aux = nwn;
+            m = m->seg;
+        }
+        
+        u = aux;
+        return cp;
+    
+    }
+}
+
+void borrar_lista(node_llista* n){
+    
+    if (n != NULL){
+        borrar_lista(n->seg);
+        delete n;
+        n->seg = NULL;
+        n = NULL;
+    }
+}
+
+
+Llista& operator=(const Llista& original){
+        
+    /* Pre: cer */
+    /* Post: El p.i. passa a ser una còpia d'orignial i qualsebol
+       contingut anterior del p.i. ha estat esborrat (excepte si el
+       p.i. i orig ja eren el mateix objecte)*/
+    
+    if (this!= &original){
+        
+        longitud = original.longitud;
+        borrar_lista(this->primer_node);
+        primer_node = copia_node_llista_it(original.primer_node, original.act, ultim_node, act);
+    }
+    
+    return *this;
+
+    
+}
