@@ -1,0 +1,48 @@
+#include <iostream>
+#include <list>
+using namespace std;
+
+void seleccio(const list<double>& l, list<double>& sel){
+/* Pre: l no es vacia, sol es vacia */
+/* Post: sel es el resultado de extraer de l los elementos debiles en media */
+    
+    list<double>::const_iterator it = l.begin();
+    list<double>::iterator it2;
+
+    sel.insert(sel.end(), (*it));
+    int elem = 1;
+    double suma = (*it);
+    ++it;
+    
+    while (it != l.end()){
+        
+        if ((*it) >= (suma/elem)) sel.insert(sel.end(),(*it));
+        
+        suma += (*it);
+        ++elem;
+        ++it;
+    }
+    
+    /*it2 = sel.begin();
+    while (it2 != sel.end()){
+        
+        cout << (*it2) << ' ';
+        ++it2;
+    }
+    cout << endl;*/
+}
+
+/*int main(){
+    double d;
+    list<double> l;
+    list<double> sel;
+    while (cin >> d and d != 0) l.insert(l.end(), d);
+    
+    list<double>::iterator it = l.begin();
+    while (it != l.end()){
+        cout << *it << ' ';
+        ++it;
+    }
+    cout << endl;
+    seleccio(l, sel);
+}*/
