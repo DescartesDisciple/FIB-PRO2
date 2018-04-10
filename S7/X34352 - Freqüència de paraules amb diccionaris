@@ -1,0 +1,16 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main(){
+    
+    map<string, int> m;
+    char c;
+    string s;
+    while (cin >> c){
+        
+        cin >> s;
+        if (c == 'a') ++m[s];
+        else cout << m[s] << endl;;
+    }
+}
