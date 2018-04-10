@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include "Estudiant.hh"
+#include "Cjt_estudiants.hh"
+using namespace std;
+
+
+void modificar_a (Cjt_estudiants& a, const Cjt_estudiants& b){
+    
+    
+    int n = a.mida();
+    
+    Estudiant est_a;
+    Estudiant est_b;
+    
+    for (int i = 1; i <= n; ++i){
+        
+        est_a = a.consultar_iessim(i);
+        est_b = b.consultar_iessim(i);
+        
+        if (est_a.te_nota() and est_b.te_nota()){
+            
+            if (est_a.consultar_nota() <= est_b.consultar_nota()) a.modificar_iessim(i, est_b);
+        }
+        
+        else if (not est_a.te_nota() and est_b.te_nota()) a.modificar_iessim(i, est_b);
+        
+    }
+    
+}
+
+int main() {
+    
+    Cjt_estudiants a; //define y lee cjt 1
+    a.llegir();
+    
+    Cjt_estudiants b; //define y lee cjt 2
+    b.llegir();
+    
+    modificar_a(a,b); //modifica el cjt 1 con la mejor nota por alumno de entre cjts 1 y 2
+    
+    a.escriure(); // escribe el cjt 1 ya modificado
+}
