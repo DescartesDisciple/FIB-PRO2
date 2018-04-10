@@ -1,0 +1,51 @@
+#include "Estudiant.hh"
+#include <vector>
+
+typedef vector<double> Fila;
+typedef vector<Fila> Matriz;
+
+void redondear (Matriz& M, vector<bool>& v, int& al, int& as, double& sel){
+    
+  
+    for (int i = 0; i < al; ++i){
+        cout << M[i][0] << ' ';
+        double suma = 0;
+        
+        for (int j = 0; j < as+1; ++j){
+            if (v[j]) suma+= M[i][j];
+        }
+        cout << suma/sel << endl;
+    }
+}
+        
+int main(){
+    
+    int m,n,sel;
+    double s;
+    cin >> m >> n >> s;
+    vector<bool> as(n+1,0);
+    for (int i = 0; i < s; ++i){
+        cin >> sel;
+        as[sel] = true;
+    }
+    //Entrada y declaraciรณn de matriz
+    
+    Matriz M(m, Fila(n+1));
+    for (int i = 0; i < m; ++i){
+        for (int j = 0; j < n+1; ++j){
+            cin >> M[i][j];
+        }
+    }
+    redondear(M, as, m, n, s);
+}
+    /*
+    //Escritura de matriz
+    for (int i = 0; i < m; ++i){
+        for (int j = 0; j  < n+1; ++j){
+            cout << M[i][j] << ' ';
+        }
+        cout << endl;
+    }
+}
+     */       
+            
