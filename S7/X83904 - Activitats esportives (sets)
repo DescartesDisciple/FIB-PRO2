@@ -1,0 +1,66 @@
+#include <iostream>
+#include <set>
+using namespace std;
+
+void read_set(set<string>& d){
+    
+    string s;
+    while(cin >> s and s != ".") d.insert(s);
+}
+
+void write_set(const set<string> s){
+    
+    set <string>::iterator it = s.begin();
+    while (it != s.end()){
+        cout << ' ' << *it;
+        ++it;
+    }
+    cout << endl;
+}
+
+void check_a(set<string>& all, set<string>& act){
+    
+    set<string> aux = all;
+    set<string>::iterator it = all.begin();
+    while (it != all.end()){
+        
+        if (act.find(*it) == act.end()) aux.erase(*it);
+        ++it;
+    }
+    all = aux;
+}
+void check_n(set<string>& none, set<string>& act){
+    
+    set<string> aux = none;
+    set<string>::iterator it = none.begin();
+    while (it != none.end()){
+        
+        if (act.find(*it) != act.end()) aux.erase(*it);
+        ++it;
+    }
+    none = aux;
+}
+
+int main(){
+    
+    int n;
+    set<string> all;
+    set<string> none;
+    
+    read_set(all);
+    none = all;
+    
+    cin >> n;
+    for (int i = 0; i < n; ++i){
+        
+        set<string> act;
+        
+        read_set(act);
+        check_a(all, act);
+        check_n(none, act);
+    }
+    cout << "Totes les activitats:";
+    write_set(all);
+    cout << "Cap activitat:";
+    write_set(none);
+}
